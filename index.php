@@ -128,7 +128,7 @@ require('./_config.php');
             <div class="mw-body">
                 <div class="container">
                     <div id="action-button">
-                        <a href="/home" class="btn btn-lg btn-radius btn-primary">View Full Site <i
+                        <a href="<?= $websiteUrl ?>/home" class="btn btn-lg btn-radius btn-primary">View Full Site <i
                                 class="fas fa-arrow-circle-right ml-2"></i></a>
                     </div>
                     <script type="text/javascript"

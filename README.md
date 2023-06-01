@@ -1,5 +1,4 @@
-Anime Streaming Website
-Welcome to the Anime Streaming Website project! This is a platform where anime enthusiasts can stream and watch their favorite anime shows and movies. This README provides an overview of the project, instructions on how to set it up, and details on how to deploy it.
+Welcome to Anikatsu! This is a platform where anime enthusiasts can stream and watch their favorite anime shows and movies. This README provides an overview of the project, instructions on how to set it up, and details on how to deploy it.
 
 Features
 Stream and watch a vast collection of anime shows and movies.

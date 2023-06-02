@@ -1,11 +1,6 @@
 <?php 
 session_start();
-require('../_config.php'); 
-$parts=parse_url($_SERVER['REQUEST_URI']); 
-$page_url=explode('/', $parts['path']);
-$url = $page_url[count($page_url)-1]  ;
-$name = str_replace("-", " ", $url);
-$name = ucfirst($name);
+require('./_config.php'); 
 if(!isset($_GET['page'])){
     $page = 1;
 }else{
@@ -16,11 +11,11 @@ if(!isset($_GET['page'])){
 <html prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <title><?=$name?> on <?=$websiteTitle?></title>
+    <title>New Seasons On <?=$websiteTitle?></title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="title" content="<?=$name?> on <?=$websiteTitle?>">
-    <meta name="description" content="Tv Series in HD with No Ads. Watch anime online">
+    <meta name="title" content="New Seasons On <?=$websiteTitle?>">
+    <meta name="description" content="Popular Anime in HD with No Ads. Watch anime online">
     <meta name="keywords" content="<?=$websiteTitle?>, watch anime online, free anime, anime stream, anime hd, english sub, kissanime, gogoanime, animeultima, 9anime, 123animes, <?=$websiteTitle?>, vidstreaming, gogo-stream, animekisa, zoro.to, gogoanime.run, animefrenzy, animekisa">
     <meta name="charset" content="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
@@ -28,18 +23,13 @@ if(!isset($_GET['page'])){
     <meta name="googlebot" content="index, follow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Content-Language" content="en">
-    <meta property="og:title" content="<?=$name?> on <?=$websiteTitle?>">
-    <meta property="og:description" content="<?=$name?> on <?=$websiteTitle?> in HD with No Ads. Watch anime online">
+    <meta property="og:title" content="New Seasons On <?=$websiteTitle?>">
+    <meta property="og:description" content="New Seasons On <?=$websiteTitle?> in HD with No Ads. Watch anime online">
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="<?=$websiteTitle?>">
     <meta itemprop="image" content="<?=$banner?>">
     <meta property="og:image" content="<?=$banner?>">
-    <meta property="og:image:width" content="650">
-    <meta property="og:image:height" content="350">
-    <meta property="twitter:card" content="summary">
-    <meta name="apple-mobile-web-app-status-bar" content="#202125">
-    <meta name="theme-color" content="#202125">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" type="text/css">
     <link rel="shortcut icon" href="<?=$websiteUrl?>/favicon.ico?v=<?=$version?>" type="image/x-icon">
@@ -72,7 +62,7 @@ if(!isset($_GET['page'])){
 <body data-page="page_anime">
     <div id="sidebar_menu_bg"></div>
     <div id="wrapper" data-page="page_home">
-        <?php include('../_php/header.php'); ?>
+        <?php include('./_php/header.php'); ?>
         <div class="clearfix"></div>
         <div id="main-wrapper">
             <div class="container">
@@ -80,7 +70,7 @@ if(!isset($_GET['page'])){
                     <section class="block_area block_area_category">
                         <div class="block_area-header">
                             <div class="float-left bah-heading mr-4">
-                                <h2 class="cat-heading"><?=$name?></h2>
+                                <h2 class="cat-heading">New Season</h2>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -89,18 +79,18 @@ if(!isset($_GET['page'])){
                                 <div class="film_list-wrap">
 
                                 <?php 
-                                $json = file_get_contents("$api/season/$url?page=$page");
+                                $json = file_get_contents("$api/new-season?page=$page");
                                 $json = json_decode($json, true);
-                                foreach($json as $key => $subCat) { ?>
+                                foreach($json as $key => $newSea) { ?>
                                     <div class="flw-item">
                                         <div class="film-poster">
-                                        <div class="tick ltr">
-                                                <div class="tick-item-<?php $str = $subCat['animeTitle'];
+                                            <div class="tick ltr">
+                                                <div class="tick-item-<?php $str = $newSea['animeTitle'];
                                                   $last_word_start = strrpos ( $str , " ") + 1;
                                                   $last_word_end = strlen($str) - 1;
                                                   $last_word = substr($str, $last_word_start, $last_word_end);
                                                   if ($last_word == "(Dub)"){echo "dub";} else {echo "sub";}
-                                                ?>  tick-eps amp-algn"><?php $str = $subCat['animeTitle'];
+                                                ?>   tick-eps amp-algn"><?php $str = $newSea['animeTitle'];
                                                 $last_word_start = strrpos ( $str , " ") + 1;
                                                 $last_word_end = strlen($str) - 1;
                                                 $last_word = substr($str, $last_word_start, $last_word_end);
@@ -110,24 +100,24 @@ if(!isset($_GET['page'])){
                                             <div class="tick rtl">
                                             </div>
                                             <img class="film-poster-img lazyload"
-                                                data-src="<?=$subCat['imgUrl']?>"
+                                                data-src="<?=$newSea['imgUrl']?>"
                                                 src="<?=$websiteUrl?>/files/images/no_poster.jpg"
-                                                alt="<?=$subCat['animeTitle']?>">
+                                                alt="<?=$newSea['animeTitle']?>">
                                             <a class="film-poster-ahref"
-                                                href="/anime/<?=$subCat['animeId']?>"
-                                                title="<?=$subCat['animeTitle']?>"
-                                                data-jname="<?=$subCat['animeTitle']?>"><i class="fas fa-play"></i></a>
+                                                href="/anime/<?=$newSea['animeId']?>"
+                                                title="<?=$newSea['animeTitle']?>"
+                                                data-jname="<?=$newSea['animeTitle']?>"><i class="fas fa-play"></i></a>
                                         </div>
                                         <div class="film-detail">
                                             <h3 class="film-name">
                                                 <a
-                                                    href="/anime/<?=$subCat['animeId']?>"
-                                                    title="<?=$subCat['animeTitle']?>"
-                                                    data-jname="<?=$subCat['animeTitle']?>"><?=$subCat['animeTitle']?></a>
+                                                    href="/anime/<?=$newSea['animeId']?>"
+                                                    title="<?=$newSea['animeTitle']?>"
+                                                    data-jname="<?=$newSea['animeTitle']?>"><?=$newSea['animeTitle']?></a>
                                             </h3>
                                             <div class="description"></div>
                                             <div class="fd-infor">
-                                                <span class="fdi-item"><?=$subCat['status']?></span>
+                                                <span class="fdi-item"><?=$newSea['status']?></span>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -164,9 +154,9 @@ if(!isset($_GET['page'])){
                                     <nav>
                                         <ul class="ulclear az-list">
                                         <?php 
-                                           $subCatPage = file_get_contents("$api/subCategoryPage?page=$page&subCategory=$url");
-                                           $subCatPage = json_decode($subCatPage, true); { ?>
-                                             <?=$subCatPage['pagination']; ?>
+                                           $newSeaPage = file_get_contents("$api/newSeasonPage?page=$page");
+                                           $newSeaPage = json_decode($newSeaPage, true); { ?>
+                                             <?=$newSeaPage['pagination']; ?>
                                            <?php } ?>
                                         </ul>
                                     </nav>
@@ -176,11 +166,11 @@ if(!isset($_GET['page'])){
                     </section>
                     <div class="clearfix"></div>
                 </div>
-                <?php include('../_php/sidenav.php'); ?>
+                <?php include('./_php/sidenav.php'); ?>
                 <div class="clearfix"></div>
             </div>
         </div>
-        <?php include('../_php/footer.php'); ?>
+        <?php include('./_php/footer.php'); ?>
         <div id="mask-overlay"></div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         
